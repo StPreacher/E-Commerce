@@ -32,8 +32,8 @@ class CategoryFragment : Fragment() {
         database.child("kategori").get().addOnSuccessListener {
 
             val response = KategoriList(it.value as List<Kategori>)
+            Log.d("Response","${response.kategoriList}")
 
-            Log.d("Response","$response")
         }.addOnFailureListener {
             Log.d("Response", it.localizedMessage)
         }
