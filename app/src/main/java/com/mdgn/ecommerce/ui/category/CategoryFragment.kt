@@ -10,7 +10,6 @@ import com.mdgn.ecommerce.R
 
 class CategoryFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
