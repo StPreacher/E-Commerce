@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CategoryFragment : Fragment() {
 
     private lateinit var binding: FragmentCategoryBinding
-    private val categoryAdapter = CategoryAdapter(arrayListOf(),this::onCategoryItemClicked)
+    private val categoryAdapter = CategoryAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,10 +58,5 @@ class CategoryFragment : Fragment() {
         })
 
     }
-
-    private fun onCategoryItemClicked(position:Int){
-        Log.d("Deneme",position.toString())
-    }
-
 
 }

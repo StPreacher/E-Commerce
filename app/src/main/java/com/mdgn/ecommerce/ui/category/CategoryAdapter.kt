@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.mdgn.ecommerce.R
 import com.mdgn.ecommerce.databinding.BaseRowCategoryBinding
@@ -12,29 +13,17 @@ import com.mdgn.ecommerce.model.Kategori
 import com.mdgn.ecommerce.util.getProgressDrawable
 import com.mdgn.ecommerce.util.loadImage
 
-class CategoryAdapter(var categoryList : List<Kategori>,itemClick : (position : Int) -> Unit)
+class CategoryAdapter(var categoryList : List<Kategori>)
     : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(),CategoryClickListener {
 
-    //TODO En son resime degilde bos yere tiklanildiginda click calisiyor, sorun bu
-
-    private val itemClick = itemClick
-
-    inner class ViewHolder(var view : BaseRowCategoryBinding, itemClick : (position : Int) -> Unit)
-        : RecyclerView.ViewHolder(view.root) {
-
-            init {
-                view.root.setOnClickListener {
-                    itemClick(adapterPosition)
-                }
-            }
-
-    }
+    inner class ViewHolder(var view : BaseRowCategoryBinding)
+        : RecyclerView.ViewHolder(view.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryAdapter.ViewHolder {
         val inflater =LayoutInflater.from(parent.context)
         val view = DataBindingUtil.inflate<BaseRowCategoryBinding>(inflater, R.layout.base_row_category,parent,false)
 
-        return ViewHolder(view,itemClick)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CategoryAdapter.ViewHolder, position: Int) {
@@ -45,14 +34,16 @@ class CategoryAdapter(var categoryList : List<Kategori>,itemClick : (position : 
             .categoryImageView
             .context))
 
+        holder.view.listener = this
+
     }
 
     override fun getItemCount(): Int = categoryList.size
 
-    override fun onCategoryClicked(view: View) {
-//        val categoryID =view.id )
-//        val action = CategoryFragmentDirections.actionCategoryFragmentToSecondCategoryFragment(categoryID)
-//        Navigation.findNavController(view).navigate(action)
+    override fun onCategoryClicked(v: View) {
+        val categoryID =v.id
+        val action = CategoryFragmentDirections.actionCategoryFragmentToSecondCategoryFragment(categoryID)
+        Navigation.findNavController(v).navigate(action)
     }
 
 
