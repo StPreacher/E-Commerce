@@ -7,6 +7,9 @@
         <variable
             name="baseKategori"
             type="com.mdgn.ecommerce.model.Kategori" />
+        <variable
+            name="listener"
+            type="com.mdgn.ecommerce.ui.category.CategoryClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +27,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/categoryHeader"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/ic_launcher_background"
+            android:onClick="@{listener::onCategoryClicked}"/>
 
         <TextView
             android:textColor="@color/black"

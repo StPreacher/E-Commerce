@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,15 +16,12 @@ import com.mdgn.ecommerce.model.KategoriList
 import com.mdgn.ecommerce.ui.vm.CategoryFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-//TODO Hash-Map ler ile veri cekilmesi gerekiyor
-// sanirim en son hata ile kaldik Firebase read data
-// olaylarini izleyip yapabilirsin
 
 @AndroidEntryPoint
 class CategoryFragment : Fragment() {
 
     private lateinit var binding: FragmentCategoryBinding
-    private val categoryAdapter = CategoryAdapter(arrayListOf())
+    private val categoryAdapter = CategoryAdapter(arrayListOf(),this::onCategoryItemClicked)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,11 +45,7 @@ class CategoryFragment : Fragment() {
             adapter = categoryAdapter
         }
 
-
-
         observeViewModel(viewmodel)
-
-
 
     }
     private fun observeViewModel(viewmodel: CategoryFragmentViewModel) {
@@ -63,6 +57,10 @@ class CategoryFragment : Fragment() {
             }
         })
 
+    }
+
+    private fun onCategoryItemClicked(position:Int){
+        Log.d("Deneme",position.toString())
     }
 
 

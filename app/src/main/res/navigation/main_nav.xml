@@ -19,7 +19,11 @@
         android:id="@+id/categoryFragment"
         android:name="com.mdgn.ecommerce.ui.category.CategoryFragment"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_category" />
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_secondCategoryFragment"
+            app:destination="@id/secondCategoryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.mdgn.ecommerce.ui.favorite.FavoriteFragment"
@@ -30,4 +34,13 @@
         android:name="com.mdgn.ecommerce.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/secondCategoryFragment"
+        android:name="com.mdgn.ecommerce.ui.category.SecondCategoryFragment"
+        android:label="fragment_second_category"
+        tools:layout="@layout/fragment_second_category" >
+        <argument
+            android:name="categoryID"
+            app:argType="integer" />
+    </fragment>
 </navigation>
