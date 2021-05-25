@@ -1,7 +1,7 @@
 package com.mdgn.ecommerce.model
 
 data class AltKategori(
-    val altID : Int,
-    val altTittle : String,
-    val altAltKategori : List<ProductList>
+    var alt_id : Int ?= null,
+    var alt_tittle : String ?= null,
+    var alt_alt_kategori : List<ProductList> ?= null
 )

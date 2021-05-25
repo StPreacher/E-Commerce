@@ -1,8 +1,8 @@
 package com.mdgn.ecommerce.model
 
 data class Kategori(
-    val id : Int,
-    val title : String,
-    val image : String,
-    val altKategori : List<AltKategori>
+    var id: Int? = null,
+    var tittle: String? = null,
+    var url: String? = null,
+    var alt_kategori: List<AltKategori>? = null
 )

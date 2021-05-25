@@ -14,18 +14,25 @@ import javax.inject.Inject
 @HiltViewModel
 class CategoryFragmentViewModel @Inject constructor(private val repository: CategoryRepository) : ViewModel(){
 
-    val categoryList = MutableLiveData<KategoriList?>()
+    val categoryList = MutableLiveData<List<Kategori>>()
+    private val tempCategoryList = mutableListOf<Kategori>()
 
     fun getAllCategories(childName : String) {
         viewModelScope.launch {
 
-            repository.getCategoryReference().let {
+            repository.getCategoryReference().let { it ->
                 it.child(childName).get().addOnSuccessListener {
 
-                    categoryList.value = KategoriList(it.value as List<Kategori>)
+                    if(it.exists()){
+                        for (categorySnapshot in it.children){
+                            val category = categorySnapshot.getValue(Kategori::class.java)
+                            tempCategoryList.add(category!!)
+                        }
+                        categoryList.value = tempCategoryList
+                    }
 
                 }.addOnFailureListener{
-                    categoryList.value = null
+                    categoryList.value = mutableListOf()
                     Log.d("Response", it.localizedMessage)
                 }
             }

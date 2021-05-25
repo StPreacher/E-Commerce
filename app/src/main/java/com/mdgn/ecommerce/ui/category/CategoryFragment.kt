@@ -8,19 +8,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mdgn.ecommerce.R
+import com.mdgn.ecommerce.databinding.FragmentCategoryBinding
+import com.mdgn.ecommerce.model.KategoriList
 import com.mdgn.ecommerce.ui.vm.CategoryFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+//TODO Hash-Map ler ile veri cekilmesi gerekiyor
+// sanirim en son hata ile kaldik Firebase read data
+// olaylarini izleyip yapabilirsin
+
 @AndroidEntryPoint
 class CategoryFragment : Fragment() {
+
+    private lateinit var binding: FragmentCategoryBinding
+    private val categoryAdapter = CategoryAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding = FragmentCategoryBinding.inflate(layoutInflater, container, false)
+        val view = binding.root
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,14 +42,25 @@ class CategoryFragment : Fragment() {
         val viewmodel : CategoryFragmentViewModel by viewModels()
         viewmodel.getAllCategories("kategori")
 
+        binding.categoryListView.apply {
+            layoutManager =LinearLayoutManager(context)
+            adapter = categoryAdapter
+        }
+
+
+
         observeViewModel(viewmodel)
 
 
-    }
 
+    }
     private fun observeViewModel(viewmodel: CategoryFragmentViewModel) {
         viewmodel.categoryList.observe(viewLifecycleOwner, Observer {
-            Log.d("LastResponse", it?.kategoriList?.toList().toString())
+            it?.let {
+                Log.d("Response", it.toList().toString())
+                categoryAdapter.categoryList = it
+                categoryAdapter.notifyDataSetChanged()
+            }
         })
 
     }
