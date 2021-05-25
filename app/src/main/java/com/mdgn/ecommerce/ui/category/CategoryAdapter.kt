@@ -1,6 +1,7 @@
 package com.mdgn.ecommerce.ui.category
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.mdgn.ecommerce.databinding.BaseRowCategoryBinding
 import com.mdgn.ecommerce.model.Kategori
 import com.mdgn.ecommerce.util.getProgressDrawable
 import com.mdgn.ecommerce.util.loadImage
+import kotlinx.android.synthetic.main.base_row_category.view.*
 
 class CategoryAdapter(var categoryList : List<Kategori>)
     : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(),CategoryClickListener {
@@ -41,7 +43,8 @@ class CategoryAdapter(var categoryList : List<Kategori>)
     override fun getItemCount(): Int = categoryList.size
 
     override fun onCategoryClicked(v: View) {
-        val categoryID =v.id
+        val categoryID = v.categoryID.text.toString().toInt()
+        Log.v("Id", categoryID.toString())
         val action = CategoryFragmentDirections.actionCategoryFragmentToSecondCategoryFragment(categoryID)
         Navigation.findNavController(v).navigate(action)
     }
