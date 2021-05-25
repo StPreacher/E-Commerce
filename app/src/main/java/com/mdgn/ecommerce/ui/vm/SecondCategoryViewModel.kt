@@ -38,4 +38,9 @@ class SecondCategoryViewModel @Inject constructor(private val repository: Catego
 
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        tempCategoryList.clear()
+    }
+
 }
