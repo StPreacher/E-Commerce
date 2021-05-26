@@ -44,7 +44,6 @@ class CategoryFragment : Fragment() {
             layoutManager =LinearLayoutManager(context)
             adapter = categoryAdapter
         }
-
         observeViewModel(viewmodel)
 
     }

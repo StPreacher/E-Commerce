@@ -48,11 +48,14 @@
     </fragment>
     <fragment
         android:id="@+id/thirdFragment"
-        android:name="com.mdgn.ecommerce.ui.category.ThirdFragment"
+        android:name="com.mdgn.ecommerce.ui.category.ThirdCategoryFragment"
         android:label="fragment_third"
         tools:layout="@layout/fragment_third" >
         <argument
             android:name="altCategoryID"
+            app:argType="integer" />
+        <argument
+            android:name="categoryID"
             app:argType="integer" />
     </fragment>
 </navigation>

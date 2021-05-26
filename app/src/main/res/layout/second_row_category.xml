@@ -37,8 +37,7 @@
                     android:id="@+id/altcategoryID"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:visibility="gone"
-                    android:text="@{String.valueOf(altKategori.alt_id)}"/>
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/altCategoryTittle"

@@ -20,7 +20,7 @@ class SecondCategoryFragment : Fragment() {
 
     private var categoryId : Int ?= null
     private lateinit var binding: FragmentSecondCategoryBinding
-    private val categoryAdapter = SecondCatregoryAdapter(arrayListOf())
+    private val categoryAdapter = SecondCatregoryAdapter(arrayListOf(),null)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +56,7 @@ class SecondCategoryFragment : Fragment() {
             it?.let {
                 println("Listemiz = ${it.toList()}")
                 categoryAdapter.categoryList = it
+                categoryAdapter.categoryID = categoryId
                 categoryAdapter.notifyDataSetChanged()
             }
         })
