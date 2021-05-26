@@ -18,7 +18,7 @@ class SecondCategoryViewModel @Inject constructor(private val repository: Catego
     private val tempCategoryList = mutableListOf<AltKategori>()
 
     fun getSecondCategories(childName1:String,childName2:String,categoryId :Int){
-
+        tempCategoryList.clear()
         viewModelScope.launch {
             repository.getCategoryReference().let { it ->
                 it.child(childName1).child(categoryId.toString()).child(childName2).get().addOnSuccessListener {
@@ -37,11 +37,6 @@ class SecondCategoryViewModel @Inject constructor(private val repository: Catego
             }
         }
 
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        tempCategoryList.clear()
     }
 
 }

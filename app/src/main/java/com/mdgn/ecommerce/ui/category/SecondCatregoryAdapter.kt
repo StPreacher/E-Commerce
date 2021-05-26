@@ -1,14 +1,18 @@
 package com.mdgn.ecommerce.ui.category
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.mdgn.ecommerce.R
 import com.mdgn.ecommerce.databinding.SecondRowCategoryBinding
 import com.mdgn.ecommerce.model.AltKategori
+import kotlinx.android.synthetic.main.second_row_category.view.*
 
-class SecondCatregoryAdapter (var categoryList : List<AltKategori>) : RecyclerView.Adapter<SecondCatregoryAdapter.SecondViewHolder>() {
+class SecondCatregoryAdapter (var categoryList : List<AltKategori>)
+    : RecyclerView.Adapter<SecondCatregoryAdapter.SecondViewHolder>(), CategoryClickListener {
 
 
     inner class SecondViewHolder(val view : SecondRowCategoryBinding) : RecyclerView.ViewHolder(view.root) {
@@ -24,7 +28,16 @@ class SecondCatregoryAdapter (var categoryList : List<AltKategori>) : RecyclerVi
 
     override fun onBindViewHolder(holder: SecondViewHolder, position: Int) {
         holder.view.altKategori = categoryList[position]
+        holder.view.listener = this
     }
 
     override fun getItemCount(): Int = categoryList.size
+
+    override fun onCategoryClicked(v: View) {
+
+        val altCategoryID = v.altcategoryID.text.toString().toInt()
+        val action = SecondCategoryFragmentDirections.actionSecondCategoryFragmentToThirdFragment(altCategoryID)
+        Navigation.findNavController(v).navigate(action)
+
+    }
 }
