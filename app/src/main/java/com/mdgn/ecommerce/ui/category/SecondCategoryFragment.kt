@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mdgn.ecommerce.databinding.FragmentSecondCategoryBinding
 import com.mdgn.ecommerce.ui.vm.SecondCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +20,7 @@ class SecondCategoryFragment : Fragment() {
 
     private var categoryId : Int ?= null
     private lateinit var binding: FragmentSecondCategoryBinding
+    private val categoryAdapter = SecondCatregoryAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +40,13 @@ class SecondCategoryFragment : Fragment() {
             categoryId = SecondCategoryFragmentArgs.fromBundle(it).categoryID
         }
 
-
-
         val viewmodel : SecondCategoryViewModel by viewModels()
-        viewmodel.getSecondCategories("kategori",categoryId!!)
+        viewmodel.getSecondCategories("kategori","alt_kategori",categoryId!!)
+
+        binding.secondCategoryRecyclerView.apply {
+            adapter = categoryAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
 
         observeViewModel(viewmodel,view)
     }
@@ -48,7 +54,9 @@ class SecondCategoryFragment : Fragment() {
     private fun observeViewModel(viewmodel: SecondCategoryViewModel, view: View) {
         viewmodel.categoryList.observe(viewLifecycleOwner, Observer {
             it?.let {
-
+                println("Listemiz = ${it.toList()}")
+                categoryAdapter.categoryList = it
+                categoryAdapter.notifyDataSetChanged()
             }
         })
     }

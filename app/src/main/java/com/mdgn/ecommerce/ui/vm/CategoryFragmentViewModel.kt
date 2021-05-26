@@ -17,8 +17,8 @@ class CategoryFragmentViewModel @Inject constructor(private val repository: Cate
     private val tempCategoryList = mutableListOf<Kategori>()
 
     fun getAllCategories(childName : String) {
+        tempCategoryList.clear()
         viewModelScope.launch {
-
             repository.getCategoryReference().let { it ->
                 it.child(childName).get().addOnSuccessListener {
 
@@ -28,6 +28,7 @@ class CategoryFragmentViewModel @Inject constructor(private val repository: Cate
                             tempCategoryList.add(category!!)
                         }
                         categoryList.value = tempCategoryList
+
                     }
 
                 }.addOnFailureListener{
@@ -39,6 +40,7 @@ class CategoryFragmentViewModel @Inject constructor(private val repository: Cate
         }
 
     }
+
 
 
 }

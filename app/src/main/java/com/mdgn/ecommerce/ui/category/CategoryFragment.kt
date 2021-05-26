@@ -52,7 +52,7 @@ class CategoryFragment : Fragment() {
         viewmodel.categoryList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 Log.d("Response", it.toList().toString())
-                categoryAdapter.categoryList = it
+                categoryAdapter.updateUserList(it)
                 categoryAdapter.notifyDataSetChanged()
             }
         })

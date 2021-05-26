@@ -17,17 +17,18 @@ class SecondCategoryViewModel @Inject constructor(private val repository: Catego
     val categoryList = MutableLiveData<List<AltKategori>>()
     private val tempCategoryList = mutableListOf<AltKategori>()
 
-    fun getSecondCategories(childName:String,categoryID:Int){
+    fun getSecondCategories(childName1:String,childName2:String,categoryId :Int){
 
         viewModelScope.launch {
-            repository.getCategoryReference().let {
-                it.child(childName).get().addOnSuccessListener {
+            repository.getCategoryReference().let { it ->
+                it.child(childName1).child(categoryId.toString()).child(childName2).get().addOnSuccessListener {
                     if(it.exists()){
                         for (categorySnapshot in it.children){
-                            val category = categorySnapshot.getValue(Kategori::class.java)
-                            tempCategoryList.add(category?.alt_kategori?.get(categoryID)!!)
+                            val category = categorySnapshot.getValue(AltKategori::class.java)
+                            tempCategoryList.add(category!!)
                         }
                         categoryList.value = tempCategoryList
+                        Log.d("Response", tempCategoryList.toList().toString())
                     }
                 }.addOnFailureListener {
                     categoryList.value = mutableListOf()

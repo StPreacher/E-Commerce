@@ -6,4 +6,8 @@
     tools:context=".ui.category.SecondCategoryFragment">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/secondCategoryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>

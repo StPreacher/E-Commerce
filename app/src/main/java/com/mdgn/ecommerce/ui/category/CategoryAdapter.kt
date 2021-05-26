@@ -15,8 +15,15 @@ import com.mdgn.ecommerce.util.getProgressDrawable
 import com.mdgn.ecommerce.util.loadImage
 import kotlinx.android.synthetic.main.base_row_category.view.*
 
-class CategoryAdapter(var categoryList : List<Kategori>)
+class CategoryAdapter(var categoryList : ArrayList<Kategori>)
     : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(),CategoryClickListener {
+
+
+    fun updateUserList (newUserList :List<Kategori>){
+        categoryList.clear()
+        categoryList.addAll(newUserList)
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(var view : BaseRowCategoryBinding)
         : RecyclerView.ViewHolder(view.root)
