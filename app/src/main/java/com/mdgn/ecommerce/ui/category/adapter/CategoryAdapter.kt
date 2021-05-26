@@ -1,4 +1,4 @@
-package com.mdgn.ecommerce.ui.category
+package com.mdgn.ecommerce.ui.category.adapter
 
 
 import android.util.Log
@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mdgn.ecommerce.R
 import com.mdgn.ecommerce.databinding.BaseRowCategoryBinding
 import com.mdgn.ecommerce.model.Kategori
+import com.mdgn.ecommerce.ui.category.CategoryClickListener
+import com.mdgn.ecommerce.ui.category.CategoryFragmentDirections
 import com.mdgn.ecommerce.util.getProgressDrawable
 import com.mdgn.ecommerce.util.loadImage
 import kotlinx.android.synthetic.main.base_row_category.view.*
 
 class CategoryAdapter(var categoryList : ArrayList<Kategori>)
-    : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(),CategoryClickListener {
+    : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(), CategoryClickListener {
 
 
     fun updateUserList (newUserList :List<Kategori>){
@@ -28,14 +30,14 @@ class CategoryAdapter(var categoryList : ArrayList<Kategori>)
     inner class ViewHolder(var view : BaseRowCategoryBinding)
         : RecyclerView.ViewHolder(view.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater =LayoutInflater.from(parent.context)
         val view = DataBindingUtil.inflate<BaseRowCategoryBinding>(inflater, R.layout.base_row_category,parent,false)
 
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CategoryAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.view.baseKategori = categoryList[position]
         holder.view.categoryImageView.loadImage(categoryList[position]
             .url, getProgressDrawable(holder

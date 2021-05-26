@@ -1,37 +1,69 @@
 package com.mdgn.ecommerce.ui.category
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mdgn.ecommerce.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mdgn.ecommerce.databinding.FragmentThirdBinding
+import com.mdgn.ecommerce.databinding.ThirdRowCategoryBinding
+import com.mdgn.ecommerce.ui.category.adapter.ThirdCategoryAdapter
+import com.mdgn.ecommerce.ui.vm.ThirdCategoryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ThirdCategoryFragment : Fragment() {
+
+    private lateinit var binding: FragmentThirdBinding
+    private val categoryAdapter = ThirdCategoryAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_third, container, false)
+
+        binding = FragmentThirdBinding.inflate(layoutInflater,container,false)
+        val view = binding.root
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val altCategoryID = arguments?.let {
-            ThirdCategoryFragmentArgs.fromBundle(it).altCategoryID.toString()
+        var altCategoryID = arguments?.let {
+            ThirdCategoryFragmentArgs.fromBundle(it).altCategoryID
         }
+        altCategoryID = altCategoryID?.minus(1)
 
         val categoryID = arguments?.let {
-            ThirdCategoryFragmentArgs.fromBundle(it).categoryID.toString()
+            ThirdCategoryFragmentArgs.fromBundle(it).categoryID
         }
 
-        Log.v("ThirdCAtegoryFragment","kategori = $categoryID - altkategori = $altCategoryID")
+        val viewModel : ThirdCategoryViewModel by viewModels()
+        viewModel.getThirdCategories("kategori",
+            "alt_kategori",
+            "alt_alt_kategori",
+            categoryID!!,
+            altCategoryID!!)
 
+        binding.altAltCategoryRV.apply {
+            adapter = categoryAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
+        observerViewModel(viewModel)
+
+    }
+
+    private fun observerViewModel(viewModel: ThirdCategoryViewModel) {
+        viewModel.categoryList.observe(viewLifecycleOwner, Observer {
+            categoryAdapter.categoryList = it
+            categoryAdapter.notifyDataSetChanged()
+        })
     }
 
 }

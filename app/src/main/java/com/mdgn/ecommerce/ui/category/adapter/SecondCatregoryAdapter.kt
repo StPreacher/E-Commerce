@@ -1,4 +1,4 @@
-package com.mdgn.ecommerce.ui.category
+package com.mdgn.ecommerce.ui.category.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mdgn.ecommerce.R
 import com.mdgn.ecommerce.databinding.SecondRowCategoryBinding
 import com.mdgn.ecommerce.model.AltKategori
+import com.mdgn.ecommerce.ui.category.CategoryClickListener
+import com.mdgn.ecommerce.ui.category.SecondCategoryFragmentDirections
 import kotlinx.android.synthetic.main.second_row_category.view.*
 
 class SecondCatregoryAdapter (var categoryList : List<AltKategori>,var categoryID : Int?)
