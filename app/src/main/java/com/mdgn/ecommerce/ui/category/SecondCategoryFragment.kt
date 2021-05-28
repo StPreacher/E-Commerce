@@ -23,7 +23,7 @@ class SecondCategoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentSecondCategoryBinding.inflate(layoutInflater,container,false)
         val view = binding.root
