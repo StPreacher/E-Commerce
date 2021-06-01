@@ -8,12 +8,16 @@
         <variable
             name="productListItem"
             type="com.mdgn.ecommerce.model.ProductList" />
+        <variable
+            name="listener"
+            type="com.mdgn.ecommerce.ui.category.CategoryClickListener" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:onClick="@{listener::onCategoryClicked}">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

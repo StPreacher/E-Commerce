@@ -8,7 +8,6 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.mdgn.ecommerce.R
 import com.mdgn.ecommerce.databinding.ThirdRowCategoryBinding
-import com.mdgn.ecommerce.model.Kategori
 import com.mdgn.ecommerce.model.ProductList
 import com.mdgn.ecommerce.ui.category.CategoryClickListener
 import com.mdgn.ecommerce.ui.category.ThirdCategoryFragmentDirections
@@ -29,7 +28,7 @@ class ThirdCategoryAdapter (var categoryList : List<ProductList>)
 
     override fun onBindViewHolder(holder: ThirdViewHolder, position: Int) {
         holder.view.productListItem = categoryList[position]
-
+        holder.view.listener = this
     }
 
     override fun getItemCount(): Int = categoryList.size
