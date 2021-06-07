@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mdgn.ecommerce.databinding.FragmentThirdBinding
-import com.mdgn.ecommerce.databinding.ThirdRowCategoryBinding
 import com.mdgn.ecommerce.ui.category.adapter.ThirdCategoryAdapter
 import com.mdgn.ecommerce.ui.vm.ThirdCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,8 +16,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ThirdCategoryFragment : Fragment() {
 
+    private var altCategoryID : Int? = null
+    private var categoryID : Int? = null
     private lateinit var binding: FragmentThirdBinding
-    private val categoryAdapter = ThirdCategoryAdapter(arrayListOf())
+    private val categoryAdapter = ThirdCategoryAdapter(arrayListOf(),null,null)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,13 +35,13 @@ class ThirdCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var altCategoryID = arguments?.let {
-            ThirdCategoryFragmentArgs.fromBundle(it).altCategoryID
+        arguments?.let {
+            altCategoryID = ThirdCategoryFragmentArgs.fromBundle(it).altCategoryID
         }
         altCategoryID = altCategoryID?.minus(1)
 
-        val categoryID = arguments?.let {
-            ThirdCategoryFragmentArgs.fromBundle(it).categoryID
+        arguments?.let {
+            categoryID = ThirdCategoryFragmentArgs.fromBundle(it).categoryID
         }
 
         val viewModel : ThirdCategoryViewModel by viewModels()
@@ -62,6 +63,8 @@ class ThirdCategoryFragment : Fragment() {
     private fun observerViewModel(viewModel: ThirdCategoryViewModel) {
         viewModel.categoryList.observe(viewLifecycleOwner, Observer {
             categoryAdapter.categoryList = it
+            categoryAdapter.categoryID = categoryID
+            categoryAdapter.altCategoryID = altCategoryID
             categoryAdapter.notifyDataSetChanged()
         })
     }

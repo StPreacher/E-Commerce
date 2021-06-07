@@ -1,6 +1,5 @@
 package com.mdgn.ecommerce.ui.vm
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -2,6 +2,12 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="productDetail"
+            type="com.mdgn.ecommerce.model.ProductDetailList" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,7 +18,7 @@
             android:layout_width="170dp"
             android:layout_height="200dp"
             android:layout_margin="5dp"
-            android:src="@drawable/ic_launcher_background"
+            android:imageUrl="@{productDetail.product_image_url}"
             android:scaleType="fitXY"/>
 
         <LinearLayout
@@ -25,7 +31,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="@{productDetail.name}"
                 android:paddingStart="20dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -34,7 +40,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Detail"
+                android:text="@{productDetail.detail}"
                 android:paddingStart="20dp"
                 android:textSize="17sp"
                 android:textStyle="normal"/>
@@ -42,7 +48,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="45$"
+                android:text="@{String.valueOf(productDetail.price)}"
                 android:paddingStart="20dp"
                 android:textSize="17sp"
                 android:textStyle="normal"/>

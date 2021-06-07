@@ -11,8 +11,11 @@ import com.mdgn.ecommerce.databinding.ThirdRowCategoryBinding
 import com.mdgn.ecommerce.model.ProductList
 import com.mdgn.ecommerce.ui.category.CategoryClickListener
 import com.mdgn.ecommerce.ui.category.ThirdCategoryFragmentDirections
+import kotlinx.android.synthetic.main.third_row_category.view.*
 
-class ThirdCategoryAdapter (var categoryList : List<ProductList>)
+class ThirdCategoryAdapter (var categoryList : List<ProductList>,
+                            var categoryID: Int?,
+                            var altCategoryID : Int?)
     : RecyclerView.Adapter<ThirdCategoryAdapter.ThirdViewHolder>(), CategoryClickListener {
 
 
@@ -34,7 +37,9 @@ class ThirdCategoryAdapter (var categoryList : List<ProductList>)
     override fun getItemCount(): Int = categoryList.size
 
     override fun onCategoryClicked(v: View) {
-        val action = ThirdCategoryFragmentDirections.actionThirdFragmentToProductPageFragment()
+        val altAltCategoryID = v.altAltCategoryID.text.toString().toInt()
+        val action = ThirdCategoryFragmentDirections
+            .actionThirdFragmentToProductPageFragment(categoryID!!,altCategoryID!!,altAltCategoryID)
         Navigation.findNavController(v).navigate(action)
     }
 }

@@ -65,5 +65,15 @@
         android:id="@+id/productPageFragment"
         android:name="com.mdgn.ecommerce.ui.category.ProductPageFragment"
         android:label="fragment_product_page"
-        tools:layout="@layout/fragment_product_page" />
+        tools:layout="@layout/fragment_product_page" >
+        <argument
+            android:name="categoryID"
+            app:argType="integer" />
+        <argument
+            android:name="altCategoryID"
+            app:argType="integer" />
+        <argument
+            android:name="altAltCategoryID"
+            app:argType="integer" />
+    </fragment>
 </navigation>
