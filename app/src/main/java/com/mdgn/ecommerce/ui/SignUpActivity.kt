@@ -9,11 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mdgn.ecommerce.MainActivity
-import com.mdgn.ecommerce.R
-import com.mdgn.ecommerce.databinding.ActivitySignInBinding
 import com.mdgn.ecommerce.databinding.ActivitySignUpBinding
-import java.util.*
-
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var mAuth : FirebaseAuth
@@ -88,7 +84,7 @@ class SignUpActivity : AppCompatActivity() {
             .toString()
 
         userName = binding
-            .passwordText
+            .nameText
             .editText
             ?.text
             .toString()
