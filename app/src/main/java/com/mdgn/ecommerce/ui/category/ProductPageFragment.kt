@@ -63,11 +63,6 @@ class ProductPageFragment : Fragment() {
         }
         observeViewModel(viewModel)
 
-//        binding.imageFromStorage.loadImage("https://firebasestorage.googleapis.com/v0/b/e-commerce-16007.appspot.com/o/TV%20Aksesuarlar%C4%B1%201.jfif?alt=media&token=8153f14e-43e6-4199-b03e-66c164be607b",
-//        getProgressDrawable(binding.imageFromStorage.context))
-
-
-
     }
 
     private fun observeViewModel(viewModel: ProductDetailViewModel) {

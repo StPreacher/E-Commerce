@@ -6,6 +6,9 @@
         <variable
             name="productDetail"
             type="com.mdgn.ecommerce.model.ProductDetailList" />
+        <variable
+            name="listener"
+            type="com.mdgn.ecommerce.ui.category.AddToCartClickListener" />
     </data>
 
     <LinearLayout
@@ -29,6 +32,7 @@
             android:layout_margin="5dp">
 
             <TextView
+                android:id="@+id/productName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{productDetail.name}"
@@ -38,6 +42,7 @@
                 android:textColor="@color/black"/>
 
             <TextView
+                android:id="@+id/productDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{productDetail.detail}"
@@ -46,6 +51,7 @@
                 android:textStyle="normal"/>
 
             <TextView
+                android:id="@+id/productPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{String.valueOf(productDetail.price)}"
@@ -53,14 +59,15 @@
                 android:textSize="17sp"
                 android:textStyle="normal"/>
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="20dp"
-                android:text="Favorite"/>
+            <TextView
+                android:id="@+id/productID"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@{String.valueOf(productDetail.id)}"
+                android:paddingStart="20dp"/>
 
             <Button
+                android:id="@+id/addToCartButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

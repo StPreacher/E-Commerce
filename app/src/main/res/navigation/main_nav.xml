@@ -25,11 +25,6 @@
             app:destination="@id/secondCategoryFragment" />
     </fragment>
     <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="com.mdgn.ecommerce.ui.favorite.FavoriteFragment"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.mdgn.ecommerce.ui.profile.ProfileFragment"
         android:label="fragment_profile"
