@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.mdgn.ecommerce.MainActivity
@@ -17,18 +19,14 @@ class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivitySignInBinding
     private lateinit var mAuth : FirebaseAuth
+    private lateinit var eMail : String
+    private lateinit var password : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        val eMailText = findViewById<View>(R.id.eMailText) as EditText
-        val passwordText = findViewById<View>(R.id.passwordText) as EditText
-
-        val eMail = eMailText.text.toString()
-        val password = passwordText.text.toString()
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -39,16 +37,17 @@ class SignInActivity : AppCompatActivity() {
 
         //SIGN-IN
         binding.signInButton.setOnClickListener {
-            if (eMail.isNotEmpty() && password.isNotEmpty()){
+            getTextFieldsInput()
+            if (eMail.trim().length > 0 && password.trim().length > 0 ){
                 mAuth.signInWithEmailAndPassword(eMail,password).addOnCompleteListener {
                     if (it.isSuccessful){
-                        Log.w("Login", "createUserWithEmail:success")
+                        Log.w("Login", "signInWithEmail:success")
                         val user : FirebaseUser? = mAuth.currentUser
                         updateUI(user)
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     }else{
-                        Log.w("Login", "createUserWithEmail:failure", it.exception)
+                        Log.w("Login", "signInWithEmail:failure", it.exception)
                         Toast.makeText(this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()
                         updateUI(null)
@@ -61,6 +60,20 @@ class SignInActivity : AppCompatActivity() {
 
     }
 
+    private fun getTextFieldsInput() {
+        eMail = binding
+            .eMailText
+            .editText
+            ?.text
+            .toString()
+
+        password = binding
+            .passwordText
+            .editText
+            ?.text
+            .toString()
+    }
+
     override fun onStart() {
         super.onStart()
         val currentUser : FirebaseUser? = mAuth.currentUser
@@ -69,6 +82,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null){
+            Toast.makeText(this,"User is $user",Toast.LENGTH_SHORT).show()
             startActivity(Intent(this,MainActivity::class.java))
         }else{
             Toast.makeText(this,"User is null",Toast.LENGTH_SHORT).show()
