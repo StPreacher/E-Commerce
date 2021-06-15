@@ -38,14 +38,17 @@ class SignInActivity : AppCompatActivity() {
         //SIGN-IN
         binding.signInButton.setOnClickListener {
             getTextFieldsInput()
-            if (eMail.trim().length > 0 && password.trim().length > 0 ){
+            if (eMail.isNotEmpty() && password.isNotEmpty()){
                 mAuth.signInWithEmailAndPassword(eMail,password).addOnCompleteListener {
                     if (it.isSuccessful){
                         Log.w("Login", "signInWithEmail:success")
                         val user : FirebaseUser? = mAuth.currentUser
                         updateUI(user)
                         val intent = Intent(this, MainActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
+                        finish()
                     }else{
                         Log.w("Login", "signInWithEmail:failure", it.exception)
                         Toast.makeText(this, "Authentication failed.",
