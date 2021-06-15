@@ -1,4 +1,4 @@
-package com.mdgn.ecommerce.algorhytm
+package com.mdgn.ecommerce.algorithm
 
 import kotlin.math.sqrt
 

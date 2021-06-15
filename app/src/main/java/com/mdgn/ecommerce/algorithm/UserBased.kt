@@ -1,4 +1,4 @@
-package com.mdgn.ecommerce.algorhytm
+package com.mdgn.ecommerce.algorithm
 import kotlin.math.sqrt
 
 data class Detail (val avarage : Double, val zeroList : MutableList<Int>)
