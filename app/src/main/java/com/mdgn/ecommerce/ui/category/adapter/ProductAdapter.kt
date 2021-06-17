@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.mdgn.ecommerce.R
 import com.mdgn.ecommerce.databinding.ProductDetailBinding
 import com.mdgn.ecommerce.model.ProductDetailList
@@ -42,6 +43,7 @@ class ProductAdapter (var productDetailList: List<ProductDetailList>) : Recycler
             .product_image_url, getProgressDrawable(
             holder.view.productImage.context
             ))
+        //Add to cart
         holder.view.addToCartButton.setOnClickListener {
             val addedProducts = hashMapOf(
                 "imageUrl" to productDetailList[position].product_image_url,
@@ -59,6 +61,20 @@ class ProductAdapter (var productDetailList: List<ProductDetailList>) : Recycler
                                         Toast.makeText(holder.view.root.context,"Successfully Added",Toast.LENGTH_SHORT).show()}
                 .addOnFailureListener { e -> Log.w("AddCart", "Error writing document", e) }
         }
+        //Rating jobs
+        holder.view.ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+            val ratings = hashMapOf(
+                mUser?.uid to rating
+            )
+
+            mDatabase.collection("rated_products")
+                .document(productDetailList[position].id.toString())
+                .set(ratings, SetOptions.merge())
+                .addOnSuccessListener { Log.d("Rating", "DocumentSnapshot successfully written!")
+                    Toast.makeText(holder.view.root.context,"Successfully Rated",Toast.LENGTH_SHORT).show() }
+                .addOnFailureListener { e -> Log.w("Rating", "Error writing document", e) }
+        }
+
     }
 
     override fun getItemCount(): Int = productDetailList.size

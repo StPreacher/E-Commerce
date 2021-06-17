@@ -9,7 +9,14 @@
         android:id="@+id/homeFragment"
         android:name="com.mdgn.ecommerce.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/actionToItemToItemFragment"
+            app:destination="@id/itemToItemFilteringFragment" />
+        <action
+            android:id="@+id/actionToUserBased"
+            app:destination="@id/userBasedFilteringFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.mdgn.ecommerce.ui.cart.CartFragment"
@@ -71,4 +78,14 @@
             android:name="altAltCategoryID"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/itemToItemFilteringFragment"
+        android:name="com.mdgn.ecommerce.ui.home.ItemToItemFilteringFragment"
+        android:label="fragment_item_to_item_filtering"
+        tools:layout="@layout/fragment_item_to_item_filtering" />
+    <fragment
+        android:id="@+id/userBasedFilteringFragment"
+        android:name="com.mdgn.ecommerce.ui.home.UserBasedFilteringFragment"
+        android:label="fragment_user_based_filtering"
+        tools:layout="@layout/fragment_user_based_filtering" />
 </navigation>

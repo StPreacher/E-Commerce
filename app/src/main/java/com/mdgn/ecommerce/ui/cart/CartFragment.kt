@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mdgn.ecommerce.databinding.FragmentCartBinding
 
-
 class CartFragment : Fragment() {
 
     private lateinit var binding : FragmentCartBinding
@@ -27,7 +26,7 @@ class CartFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         return view
     }
-
+    //TODO Sepette urunleri listeleme islemi yapilacak
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
