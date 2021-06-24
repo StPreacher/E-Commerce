@@ -26,6 +26,7 @@
             android:layout_width="170dp"
             android:layout_height="200dp"
             android:layout_margin="5dp"
+            android:src="@mipmap/ic_launcher"
             android:imageUrl="@{productDetail.product_image_url}"
             android:scaleType="fitXY"/>
 
